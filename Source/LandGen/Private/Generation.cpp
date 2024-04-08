@@ -4,19 +4,27 @@
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
 
+
 // Sets default values
 AGeneration::AGeneration()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	//Привязка меша  (!!!уточнить позднее!!!)
+	ProceduralMesh = CreateAbstractDefaultSubobject<UProceduralMeshComponent>("ProceduralMeshComponent");
+	ProceduralMesh->SetupAttachment(GetRootComponent());
+
 }
 
 // Called when the game starts or when spawned
 void AGeneration::BeginPlay()
 {
 	Super::BeginPlay();
-	//UProceduralMeshComponent ProceduralMesh;
-	//ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), TArray<FVector2D>(), TArray<FColor>(), TArray<FProcMeshTangent>(), true);
+	// Генерация меша на основе параметров
+	//CreateMapVertices(&Vertices);
+	//CreateArrTriangles(&Triangles);
+	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
+	ProceduralMesh->SetMaterial(0, Material);//Материал
 }
 
 // Called every frame
