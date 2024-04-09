@@ -34,11 +34,24 @@ protected:
 	UPROPERTY(EditAnywhere)
 	UMaterialInterface* Material;
 
+	UPROPERTY(EditAnywhere)
+	int XSize;
+
+	UPROPERTY(EditAnywhere)
+	int YSize;
+
+	UPROPERTY(EditAnywhere)
+	float Scale;
+
+	UPROPERTY(EditAnywhere)
+	float UVScale;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	UProceduralMeshComponent* ProceduralMesh;
-
+	void GenerationVertices();
+	void GenerationTriangles();
 };

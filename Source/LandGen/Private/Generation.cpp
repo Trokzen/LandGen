@@ -3,7 +3,7 @@
 
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
-
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AGeneration::AGeneration()
@@ -21,10 +21,11 @@ void AGeneration::BeginPlay()
 {
 	Super::BeginPlay();
 	// Генерация меша на основе параметров
-	//CreateMapVertices(&Vertices);
-	//CreateArrTriangles(&Triangles);
+	GenerationVertices();
+	GenerationTriangles();
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
 	ProceduralMesh->SetMaterial(0, Material);//Материал
+	
 }
 
 // Called every frame
@@ -34,3 +35,39 @@ void AGeneration::Tick(float DeltaTime)
 
 }
 
+
+void AGeneration::GenerationVertices()
+{
+	for (int i = 0; i <= XSize; i++)
+	{
+		for (int j = 0; j <= YSize; j++)
+		{
+			//here will function Random([Zmin,Zmax]);
+			Vertices.Add({ i*Scale, j*Scale, 0 });// coordinate in space {X,Y,Z} (Vector)
+			UV0.Add({ i * UVScale, j * UVScale });
+			//Debug Sphere
+			//DrawDebugSphere(GetWorld(), { i * Scale, j * Scale, 0 }, 10, 12, FColor::Red, false, 60);
+
+		}
+	}
+}
+
+void AGeneration::GenerationTriangles()
+{
+	for (int i = 0; i < XSize; i++) // Generation Landscape
+	{
+		for (int j = 0; j < YSize; j++) // Generation Square
+		{
+			int CurPoint = i * (YSize + 1) + j; //Current point
+			int NextPointX = (i + 1) * (YSize + 1) + j; // Next point on axis_X
+			// first  triangles
+			Triangles.Add(CurPoint);
+			Triangles.Add(CurPoint + 1);
+			Triangles.Add(NextPointX);
+			// second Triangles
+			Triangles.Add(CurPoint+1);
+			Triangles.Add(NextPointX + 1);
+			Triangles.Add(NextPointX);
+		}
+	}
+}
