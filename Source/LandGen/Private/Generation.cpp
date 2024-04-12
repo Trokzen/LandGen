@@ -4,8 +4,8 @@
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
 #include "DrawDebugHelpers.h"
-#include "libPNG/libPNG-1.5.2/png.h"
-#include "FreeImage/Source/FreeImage.h"
+//#include "libPNG/libPNG-1.5.2/png.h"
+//#include "FreeImage/Source/FreeImage.h"
 
 // Sets default values
 AGeneration::AGeneration()
