@@ -46,6 +46,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float UVScale;
 
+	UPROPERTY(EditAnywhere)
+	UTexture2D* HeightMap;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -54,4 +57,6 @@ private:
 	UProceduralMeshComponent* ProceduralMesh;
 	void GenerationVertices();
 	void GenerationTriangles();
+
+	void PngToMatrix();
 };

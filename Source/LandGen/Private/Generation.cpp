@@ -4,6 +4,8 @@
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
 #include "DrawDebugHelpers.h"
+#include "libPNG/libPNG-1.5.2/png.h"
+#include "FreeImage/Source/FreeImage.h"
 
 // Sets default values
 AGeneration::AGeneration()
@@ -14,6 +16,7 @@ AGeneration::AGeneration()
 	ProceduralMesh = CreateAbstractDefaultSubobject<UProceduralMeshComponent>("ProceduralMeshComponent");
 	ProceduralMesh->SetupAttachment(GetRootComponent());
 
+	PngToMatrix();
 }
 
 // Called when the game starts or when spawned
@@ -50,6 +53,7 @@ void AGeneration::GenerationVertices()// Function generation Vertices
 
 		}
 	}
+	return ;
 }
 
 void AGeneration::GenerationTriangles()// Function generation Triangles
@@ -70,4 +74,11 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 			Triangles.Add(NextPointX);
 		}
 	}
+	return;
+}
+
+void AGeneration::PngToMatrix()
+{
+
+	return;
 }
