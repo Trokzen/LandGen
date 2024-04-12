@@ -36,13 +36,13 @@ void AGeneration::Tick(float DeltaTime)
 }
 
 
-void AGeneration::GenerationVertices()
+void AGeneration::GenerationVertices()// Function generation Vertices
 {
 	for (int i = 0; i <= XSize; i++)
 	{
 		for (int j = 0; j <= YSize; j++)
 		{
-			//here will function Random([Zmin,Zmax]);
+			//here will function Z = Random([Zmin,Zmax]);
 			Vertices.Add({ i*Scale, j*Scale, 0 });// coordinate in space {X,Y,Z} (Vector)
 			UV0.Add({ i * UVScale, j * UVScale });
 			//Debug Sphere
@@ -52,7 +52,7 @@ void AGeneration::GenerationVertices()
 	}
 }
 
-void AGeneration::GenerationTriangles()
+void AGeneration::GenerationTriangles()// Function generation Triangles
 {
 	for (int i = 0; i < XSize; i++) // Generation Landscape
 	{
