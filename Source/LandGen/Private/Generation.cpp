@@ -3,9 +3,12 @@
 
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
+
 #include "DrawDebugHelpers.h"
 #include "libPNG/libPNG-1.5.2/png.h"
 #include "FreeImage/Source/FreeImage.h"
+
+#include "CoreMinimal.h"
 
 // Sets default values
 AGeneration::AGeneration()
@@ -77,8 +80,8 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 	return;
 }
 
-void AGeneration::PngToMatrix()
+void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
-
+	
 	return;
 }
