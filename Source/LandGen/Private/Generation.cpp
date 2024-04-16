@@ -6,20 +6,17 @@
 
 #include "DrawDebugHelpers.h"
 #include "libPNG/libPNG-1.5.2/png.h"
-#include "FreeImage/Source/FreeImage.h"
-
-#include "CoreMinimal.h"
 
 // Sets default values
 AGeneration::AGeneration()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	//BackTrace to main component
+	//Connection with main component
 	ProceduralMesh = CreateAbstractDefaultSubobject<UProceduralMeshComponent>("ProceduralMeshComponent");
 	ProceduralMesh->SetupAttachment(GetRootComponent());
+	
 
-	PngToMatrix();
 }
 
 // Called when the game starts or when spawned
@@ -31,6 +28,7 @@ void AGeneration::BeginPlay()
 	GenerationTriangles();
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
 	ProceduralMesh->SetMaterial(0, Material);//Material
+	PngToMatrix();
 	
 }
 
@@ -53,7 +51,6 @@ void AGeneration::GenerationVertices()// Function generation Vertices
 			UV0.Add({ i * UVScale, j * UVScale });
 			//Debug Sphere
 			//DrawDebugSphere(GetWorld(), { i * Scale, j * Scale, 0 }, 10, 12, FColor::Red, false, 60);
-
 		}
 	}
 	return ;
@@ -82,6 +79,9 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
-	
-	return;
+
+
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("This is GEngine"));
+	//UE_LOG(LogTemp, Warning, TEXT("This is  UE_LOG"), VariableX, VariableY);
+
 }
