@@ -3,9 +3,9 @@
 
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
-
 #include "DrawDebugHelpers.h"
-#include "libPNG/libPNG-1.5.2/png.h"
+#include "CImg.h"
+
 
 // Sets default values
 AGeneration::AGeneration()
@@ -28,7 +28,7 @@ void AGeneration::BeginPlay()
 	GenerationTriangles();
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
 	ProceduralMesh->SetMaterial(0, Material);//Material
-	PngToMatrix();
+	PngToMatrix();//"height.png",5,10
 	
 }
 
@@ -79,8 +79,25 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
+	// Загрузка изображения
+
+	{
+		using namespace cimg_library;
+		const char* filename = "D:/albedo.jpg";
+		CImg<unsigned char> heightmap(filename);
+
+		// Получение координат пикселя, который хотим получить
+		const int x = 100; // Пример координаты x
+		const int y = 50;  // Пример координаты y
+
+		// Получение значения пикселя в указанных координатах
+		const unsigned char pixel_value = heightmap(x, y);
+		UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
+	}
+	
 
 
+	return;
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("This is GEngine"));
 	//UE_LOG(LogTemp, Warning, TEXT("This is  UE_LOG"), VariableX, VariableY);
 
