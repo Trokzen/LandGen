@@ -3,8 +3,11 @@
 
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
+
+//#include "FreeImage/Source/FreeImage.h"
+#include <FreeImage/FreeImage-3.18.0/Source/FreeImage.h>
+
 #include "DrawDebugHelpers.h"
-#include "CImg.h"
 
 
 // Sets default values
@@ -16,7 +19,6 @@ AGeneration::AGeneration()
 	ProceduralMesh = CreateAbstractDefaultSubobject<UProceduralMeshComponent>("ProceduralMeshComponent");
 	ProceduralMesh->SetupAttachment(GetRootComponent());
 	
-
 }
 
 // Called when the game starts or when spawned
@@ -79,25 +81,44 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
+	// Инициализация библиотеки FreeImage
+	FreeImage_Initialise(true);
 	// Загрузка изображения
+	FIBITMAP* image = FreeImage_Load(FIF_PNG, "monochrome_image.png", PNG_DEFAULT);
 
-	{
-		using namespace cimg_library;
-		const char* filename = "D:/albedo.jpg";
-		CImg<unsigned char> heightmap(filename);
+	if (image) {
+		// Получение размеров изображения
+		int width = FreeImage_GetWidth(image);
+		int height = FreeImage_GetHeight(image);
 
-		// Получение координат пикселя, который хотим получить
-		const int x = 100; // Пример координаты x
-		const int y = 50;  // Пример координаты y
+		// Получение значения пикселя в координатах (x, y)
+		int x = 50;  // Пример координаты x
+		int y = 50;   // Пример координаты y
 
-		// Получение значения пикселя в указанных координатах
-		const unsigned char pixel_value = heightmap(x, y);
-		UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
+		RGBQUAD pixel;
+		FreeImage_GetPixelColor(image, x, y, &pixel);
+
+		// Значение пикселя является компонентом яркости (R, G, B одинаковые для монохромного)
+		unsigned char pixel_value = pixel.rgbRed;
+
+		FString ValueAsString = FString::Printf(TEXT("Value: %d"), pixel_value);
+		//FString ValueString = FString()
+		
+		GEngine->AddOnScreenDebugMessage(-1, 100.f, FColor::Yellow, ValueAsString);
+
+		// Освобождение памяти после использования
+		FreeImage_Unload(image);
 	}
-	
+	else 
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Failed to load image"));
+	}
 
+	// Завершение работы с библиотекой FreeImage
+	FreeImage_DeInitialise();
 
 	return;
+	//UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("This is GEngine"));
 	//UE_LOG(LogTemp, Warning, TEXT("This is  UE_LOG"), VariableX, VariableY);
 
