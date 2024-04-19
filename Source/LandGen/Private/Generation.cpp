@@ -81,24 +81,24 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
-	// Инициализация библиотеки FreeImage
+	// Initializing the FreeImage library
 	FreeImage_Initialise(true);
-	// Загрузка изображения
+	// Download image
 	FIBITMAP* image = FreeImage_Load(FIF_PNG, "monochrome_image.png", PNG_DEFAULT);
 
 	if (image) {
-		// Получение размеров изображения
+		// get size image
 		int width = FreeImage_GetWidth(image);
 		int height = FreeImage_GetHeight(image);
 
-		// Получение значения пикселя в координатах (x, y)
-		int x = 50;  // Пример координаты x
-		int y = 50;   // Пример координаты y
+		// Get value of pixel
+		int x = 50;
+		int y = 50;   
 
 		RGBQUAD pixel;
 		FreeImage_GetPixelColor(image, x, y, &pixel);
 
-		// Значение пикселя является компонентом яркости (R, G, B одинаковые для монохромного)
+		// The pixel value is the brightness component (R, G, B are the same for monochrome)
 		unsigned char pixel_value = pixel.rgbRed;
 
 		FString ValueAsString = FString::Printf(TEXT("Value: %d"), pixel_value);
@@ -106,7 +106,7 @@ void AGeneration::PngToMatrix()//Convert Png to HeightMap
 		
 		GEngine->AddOnScreenDebugMessage(-1, 100.f, FColor::Yellow, ValueAsString);
 
-		// Освобождение памяти после использования
+		// Freeing memory after use
 		FreeImage_Unload(image);
 	}
 	else 
@@ -114,7 +114,7 @@ void AGeneration::PngToMatrix()//Convert Png to HeightMap
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Failed to load image"));
 	}
 
-	// Завершение работы с библиотекой FreeImage
+	// Completing the FreeImage Library
 	FreeImage_DeInitialise();
 
 	return;
