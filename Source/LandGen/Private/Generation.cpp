@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+//Based librarys
 #include "Generation.h"
 #include "ProceduralMeshComponent.h"
-
-//#include "FreeImage/Source/FreeImage.h"
-//#include <FreeImage/FreeImage-3.18.0/Source/FreeImage.h>
-
+//Debug librarys
 #include "DrawDebugHelpers.h"
+//Test Librarys
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image-master/stb_image.h>
 
 
 // Sets default values
@@ -81,7 +81,27 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
+    int width, height, channels;
+    unsigned char* image = stbi_load("D:/height.png", &width, &height, &channels, 1);
 
+    if (image)
+    {
+        // ѕолучение значени€ пиксел€ по координатам
+        int x = 678; // координата по оси x
+        int y = 541; // координата по оси y
+        unsigned char pixelValue = image[y * width + x];
+
+        //std::cout << "Pixel value by coordinates (" << x << ", " << y << ") = " << (int)pixelValue << std::endl;
+        //std::cout << "width:" << width << std::endl;
+        //std::cout << "height:" << height << std::endl;
+        //std::cout << "channels:" << channels << std::endl;
+        // ќсвобождение пам€ти
+        stbi_image_free(image);
+    }
+    else
+    {
+        //std::cout << "Failed to load image" << std::endl;
+    }
 	return;
 	//UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("This is GEngine"));
