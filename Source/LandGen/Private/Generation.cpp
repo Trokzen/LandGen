@@ -5,7 +5,7 @@
 #include "ProceduralMeshComponent.h"
 
 //#include "FreeImage/Source/FreeImage.h"
-#include <FreeImage/FreeImage-3.18.0/Source/FreeImage.h>
+//#include <FreeImage/FreeImage-3.18.0/Source/FreeImage.h>
 
 #include "DrawDebugHelpers.h"
 
@@ -81,41 +81,6 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
-	// Initializing the FreeImage library
-	FreeImage_Initialise(true);
-	// Download image
-	FIBITMAP* image = FreeImage_Load(FIF_PNG, "monochrome_image.png", PNG_DEFAULT);
-
-	if (image) {
-		// get size image
-		int width = FreeImage_GetWidth(image);
-		int height = FreeImage_GetHeight(image);
-
-		// Get value of pixel
-		int x = 50;
-		int y = 50;   
-
-		RGBQUAD pixel;
-		FreeImage_GetPixelColor(image, x, y, &pixel);
-
-		// The pixel value is the brightness component (R, G, B are the same for monochrome)
-		unsigned char pixel_value = pixel.rgbRed;
-
-		FString ValueAsString = FString::Printf(TEXT("Value: %d"), pixel_value);
-		//FString ValueString = FString()
-		
-		GEngine->AddOnScreenDebugMessage(-1, 100.f, FColor::Yellow, ValueAsString);
-
-		// Freeing memory after use
-		FreeImage_Unload(image);
-	}
-	else 
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Failed to load image"));
-	}
-
-	// Completing the FreeImage Library
-	FreeImage_DeInitialise();
 
 	return;
 	//UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
