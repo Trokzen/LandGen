@@ -29,6 +29,9 @@ protected:
 	//UPROPERTY(EditAnywhere)
 	TArray<int> Triangles;
 
+    //Array Z (height)
+    unsigned char** arrayHeightMap;
+
 	UPROPERTY(EditAnywhere)
 	TArray<FVector2D> UV0;
 

@@ -82,21 +82,22 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
     int width, height, channels;
-    unsigned char* image = stbi_load("D:/height.png", &width, &height, &channels, 1);
+    *arrayHeightMap = stbi_load("D:/height.png", &width, &height, &channels, 1);
 
-    if (image)
+    if (arrayHeightMap)
     {
         // ѕолучение значени€ пиксел€ по координатам
         int x = 678; // координата по оси x
         int y = 541; // координата по оси y
-        unsigned char pixelValue = image[y * width + x];
-
+        unsigned char pixelValue = *arrayHeightMap[y * width + x];
+        UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixelValue);
         //std::cout << "Pixel value by coordinates (" << x << ", " << y << ") = " << (int)pixelValue << std::endl;
         //std::cout << "width:" << width << std::endl;
         //std::cout << "height:" << height << std::endl;
         //std::cout << "channels:" << channels << std::endl;
         // ќсвобождение пам€ти
-        stbi_image_free(image);
+        ///stbi_image_free(arrayHeightMap);
+        stbi_image_free(*arrayHeightMap);
     }
     else
     {
