@@ -30,7 +30,7 @@ protected:
 	TArray<int> Triangles;
 
     //Array Z (height)
-    unsigned char** arrayHeightMap;
+    unsigned char* arrayHeightMap;
 
 	UPROPERTY(EditAnywhere)
 	TArray<FVector2D> UV0;

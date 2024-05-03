@@ -82,26 +82,22 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
     int width, height, channels;
-    *arrayHeightMap = stbi_load("D:/height.png", &width, &height, &channels, 1);
+    arrayHeightMap = stbi_load("D:/height.png", &width, &height, &channels, 1); //unsigned char* 
 
     if (arrayHeightMap)
     {
         // Получение значения пикселя по координатам
-        int x = 678; // координата по оси x
-        int y = 541; // координата по оси y
-        unsigned char pixelValue = *arrayHeightMap[y * width + x];
-        UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixelValue);
-        //std::cout << "Pixel value by coordinates (" << x << ", " << y << ") = " << (int)pixelValue << std::endl;
-        //std::cout << "width:" << width << std::endl;
-        //std::cout << "height:" << height << std::endl;
-        //std::cout << "channels:" << channels << std::endl;
+        int x = 20; // координата по оси x
+        int y = 143; // координата по оси y
+        unsigned char pixelValue = arrayHeightMap[y * width + x];
+
+        UE_LOG(LogTemp, Error, TEXT("Number to log: %d"), pixelValue);
         // Освобождение памяти
-        ///stbi_image_free(arrayHeightMap);
-        stbi_image_free(*arrayHeightMap);
+        stbi_image_free(arrayHeightMap);
     }
     else
     {
-        //std::cout << "Failed to load image" << std::endl;
+        UE_LOG(LogTemp, Log, TEXT("Failed to load image")); 
     }
 	return;
 	//UE_LOG(LogTemp, Log, TEXT("Number to log: %d"), pixel_value);
