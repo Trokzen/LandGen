@@ -32,7 +32,7 @@ protected:
     //Array HeightMap
     unsigned char* arrayHeightMap;
     
-    //Path file
+    UPROPERTY(EditAnywhere)
     FString pathFilePng;
 
 	UPROPERTY(EditAnywhere)

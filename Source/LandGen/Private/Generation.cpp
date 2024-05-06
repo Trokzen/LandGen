@@ -46,7 +46,7 @@ void AGeneration::GenerationVertices()// Function generation Vertices
 	{
 		for (int j = 0; j <= YSize; j++)
 		{
-			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[i*j + j] });// coordinate in space {X,Y,Z} (Vector)
+			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[i*YSize + j] * Scale });// coordinate in space {X,Y,Z} (Vector)
 			UV0.Add({ i * UVScale, j * UVScale });
 		}
 	}
@@ -78,9 +78,10 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
     int channels;//int width, height, channels;
-    pathFilePng = "D:/height3.png";
+    //pathFilePng = "D:/height.png";
     arrayHeightMap = stbi_load(TCHAR_TO_UTF8(*pathFilePng), &XSize, &YSize, &channels, 1);
-    
+    XSize--;
+    YSize--;
     if (arrayHeightMap)
     {
         UE_LOG(LogTemp, Log, TEXT("Loaded image"));
