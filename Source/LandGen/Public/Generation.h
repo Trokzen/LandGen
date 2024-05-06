@@ -29,8 +29,11 @@ protected:
 	//UPROPERTY(EditAnywhere)
 	TArray<int> Triangles;
 
-    //Array Z (height)
+    //Array HeightMap
     unsigned char* arrayHeightMap;
+    
+    //Path file
+    FString pathFilePng;
 
 	UPROPERTY(EditAnywhere)
 	TArray<FVector2D> UV0;
@@ -38,10 +41,10 @@ protected:
 	UPROPERTY(EditAnywhere)
 	UMaterialInterface* Material;
 
-	UPROPERTY(EditAnywhere)
+	//UPROPERTY(EditAnywhere)
 	int XSize;
 
-	UPROPERTY(EditAnywhere)
+	//UPROPERTY(EditAnywhere)
 	int YSize;
 
 	UPROPERTY(EditAnywhere)
