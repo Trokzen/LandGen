@@ -46,7 +46,8 @@ void AGeneration::GenerationVertices()// Function generation Vertices
 	{
 		for (int j = 0; j <= YSize; j++)
 		{
-			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[i*YSize + j] * Scale });// coordinate in space {X,Y,Z} (Vector)
+            //Opportunity to improve performance!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[(XSize+1) * (YSize - 1) - i * YSize + j] * Scale});// coordinate in space {X,Y,Z} (Vector)
 			UV0.Add({ i * UVScale, j * UVScale });
 		}
 	}
