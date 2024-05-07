@@ -43,17 +43,14 @@ void AGeneration::Tick(float DeltaTime)
 void AGeneration::GenerationVertices()// Function generation Vertices
 {
     //Normal
-	for (int i = 0; i <= XSize; i++)
+	for (int i = 0; i >= -XSize; i--)
 	{
 		for (int j = 0; j <= YSize; j++)
 		{
-            //Opportunity to improve performance!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[(XSize+1) * (YSize - 1) - i * YSize + j] * Scale});// coordinate in space {X,Y,Z} (Vector)
+			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[-i * YSize + j] * Scale});// coordinate in space {X,Y,Z} (Vector)
 			UV0.Add({ i * UVScale, j * UVScale });
 		}
 	}
-    ///Reverse Cycle for normalization of height
-
     stbi_image_free(arrayHeightMap);
 	return ;
 }
@@ -66,14 +63,16 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 		{
 			int CurPoint = i * (YSize + 1) + j; //Current point
 			int NextPointX = (i + 1) * (YSize + 1) + j; // Next point on axis_X
+            int NextPointY = i * (YSize + 1) + (j + 1); // Next point on axis_Y
+            int NextPointXY = (i + 1) * (YSize + 1) + (j + 1); // Next point on axis_XY
 			// first  triangles
 			Triangles.Add(CurPoint);
-			Triangles.Add(CurPoint + 1);
 			Triangles.Add(NextPointX);
+			Triangles.Add(NextPointXY);
 			// second Triangles
-			Triangles.Add(CurPoint+1);
-			Triangles.Add(NextPointX + 1);
-			Triangles.Add(NextPointX);
+			Triangles.Add(CurPoint);
+			Triangles.Add(NextPointXY);
+			Triangles.Add(NextPointY);
 		}
 	}
 	return;
