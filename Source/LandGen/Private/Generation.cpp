@@ -42,6 +42,7 @@ void AGeneration::Tick(float DeltaTime)
 
 void AGeneration::GenerationVertices()// Function generation Vertices
 {
+    //Normal
 	for (int i = 0; i <= XSize; i++)
 	{
 		for (int j = 0; j <= YSize; j++)
@@ -51,6 +52,8 @@ void AGeneration::GenerationVertices()// Function generation Vertices
 			UV0.Add({ i * UVScale, j * UVScale });
 		}
 	}
+    ///Reverse Cycle
+
     stbi_image_free(arrayHeightMap);
 	return ;
 }
