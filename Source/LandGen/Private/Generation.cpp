@@ -25,7 +25,7 @@ void AGeneration::BeginPlay()
 {
 	Super::BeginPlay();
 	// Generation Mesh
-    PngToMatrix();//"height.png",5,10
+    PngToMatrix();
 	GenerationVertices();
 	GenerationTriangles();
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, TArray<FVector>(), UV0, TArray<FColor>(), TArray<FProcMeshTangent>(), true);
@@ -82,8 +82,7 @@ void AGeneration::GenerationTriangles()// Function generation Triangles
 
 void AGeneration::PngToMatrix()//Convert Png to HeightMap
 {
-    int channels;//int width, height, channels;
-    //pathFilePng = "D:/height.png";
+    int channels;
     arrayHeightMap = stbi_load(TCHAR_TO_UTF8(*pathFilePng), &XSize, &YSize, &channels, 1);
     XSize--;
     YSize--;

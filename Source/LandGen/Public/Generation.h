@@ -35,6 +35,9 @@ protected:
     UPROPERTY(EditAnywhere)
     FString pathFilePng;
 
+    //ProgressBar
+    
+
 	UPROPERTY(EditAnywhere)
 	TArray<FVector2D> UV0;
 
