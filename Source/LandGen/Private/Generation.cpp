@@ -43,12 +43,14 @@ void AGeneration::Tick(float DeltaTime)
 void AGeneration::GenerationVertices()// Function generation Vertices
 {
     //Normal
+    int indexArrayZ = 0;
 	for (int i = 0; i >= -XSize; i--)
 	{
 		for (int j = 0; j <= YSize; j++)
 		{
-			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[-i * YSize + j] * Scale});// coordinate in space {X,Y,Z} (Vector)
+			Vertices.Add({ i*Scale, j*Scale, (float)arrayHeightMap[indexArrayZ] * Scale});// coordinate in space {X,Y,Z} (Vector)
 			UV0.Add({ i * UVScale, j * UVScale });
+            indexArrayZ++;
 		}
 	}
     stbi_image_free(arrayHeightMap);
