@@ -109,3 +109,4 @@ void AGeneration::PngToMatrix()//Convert Png to HeightMap
     //DrawDebugSphere(GetWorld(), { i * Scale, j * Scale, 0 }, 10, 12, FColor::Red, false, 60);
 
 ///Next update - Filter Gauss or others...
+///Procedural generation material/texture
