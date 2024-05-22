@@ -10,6 +10,7 @@
 #include <stb_image-master/stb_image.h>
 
 
+
 // Sets default values
 AGeneration::AGeneration()
 {
@@ -112,3 +113,5 @@ void AGeneration::PngToMatrix()//Convert Png to HeightMap
 ///Procedural generation material/texture
 /// Generation water
 /// PCG UE-5?
+/// change main version - 5.2
+/// 
