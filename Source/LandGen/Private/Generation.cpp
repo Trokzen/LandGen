@@ -9,7 +9,12 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image-master/stb_image.h>
 
-
+///test new library for generation type "Landscape"(not Mesh)
+#include "Landscape.h"
+#include "LandscapeComponent.h"
+#include "LandscapeInfo.h"
+#include "LandscapeDataAccess.h"
+//#include "PerlinNoise.h"
 
 // Sets default values
 AGeneration::AGeneration()
